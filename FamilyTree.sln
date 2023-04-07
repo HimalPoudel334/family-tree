@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTree", "FamilyTree\FamilyTree.csproj", "{33944E89-8FDA-4E81-9125-ACAC888812F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTreeLib", "FamilyTreeLib\FamilyTreeLib.csproj", "{89757AA2-FE98-40ED-BF0F-56E96B526BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyTreeData", "FamilyTreeData\FamilyTreeData.csproj", "{972E43A3-BD7E-4EF0-B527-3AC33556FE09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33944E89-8FDA-4E81-9125-ACAC888812F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33944E89-8FDA-4E81-9125-ACAC888812F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33944E89-8FDA-4E81-9125-ACAC888812F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33944E89-8FDA-4E81-9125-ACAC888812F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89757AA2-FE98-40ED-BF0F-56E96B526BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89757AA2-FE98-40ED-BF0F-56E96B526BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89757AA2-FE98-40ED-BF0F-56E96B526BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89757AA2-FE98-40ED-BF0F-56E96B526BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972E43A3-BD7E-4EF0-B527-3AC33556FE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972E43A3-BD7E-4EF0-B527-3AC33556FE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972E43A3-BD7E-4EF0-B527-3AC33556FE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972E43A3-BD7E-4EF0-B527-3AC33556FE09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,49 @@
+@model FamilyTree.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login to the app</title>
+</head>
+<body>
+    <h4>Login</h4>
+    <hr>
+    <div>
+        <form asp-action="Login" method="post" asp-controller="Home">
+            @Html.HiddenFor(m => m.ReturnUrl)
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.TextBoxFor(model => model.UserName)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Password)
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.CheckBoxFor(model => model.RememberMe)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.RememberMe)
+                </dd>
+            </dl>
+            <dl class="row">
+                <button type="submit">Login</button>
+            </dl>
+        </form>
+    </div>
+</body>
+</html>
