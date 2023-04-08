@@ -38,18 +38,18 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
             .HasColumnName("father_id")
             .HasColumnType(ColumnTypes.TEXT)
             .HasMaxLength(200)
-            .IsRequired(false);
+            .IsRequired();
         
-        _ = builder.Property(p => p.MotherId)
-            .HasColumnName("mother_id")
+        _ = builder.Property(p => p.MotherName)
+            .HasColumnName("mother_name")
             .HasColumnType(ColumnTypes.TEXT)
             .HasMaxLength(200)
             .IsRequired(false);
+        
 
         _ = builder.HasOne(p => p.Father);
-        _ = builder.HasOne(p => p.Mother);
 
-        _ = builder.HasMany(p => p.Childrens);
+        _ = builder.HasMany(p => p.Children);
 
         _ = builder.ToTable("persons");
 

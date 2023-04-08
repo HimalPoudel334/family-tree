@@ -1,4 +1,8 @@
 using FamilyTreeData.AppDbContext;
+using FamilyTreeData.Repositories;
+using FamilyTreeLib.Repositories;
+using FamilyTreeLib.Services;
+using FamilyTreeLib.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +16,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FamilyTreeDbContext>(options => 
     options.UseLazyLoadingProxies().UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Dependency Injections
+//should be moved to separate class if necessary
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 //adding authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

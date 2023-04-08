@@ -10,4 +10,8 @@
       <ProjectReference Include="..\FamilyTreeData\FamilyTreeData.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    </ItemGroup>
+
 </Project>
