@@ -1,6 +1,7 @@
 .idea/
 bin/
 obj/
+FamilyTree/wwwroot/images/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
