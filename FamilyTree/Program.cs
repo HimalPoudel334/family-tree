@@ -1,3 +1,4 @@
+using FamilyTree.Helpers;
 using FamilyTreeData.AppDbContext;
 using FamilyTreeData.Repositories;
 using FamilyTreeLib.Repositories;
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<FamilyTreeDbContext>(options =>
 //should be moved to separate class if necessary
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IFileUploadHelper, FileUploadHelper>();
 
 //adding authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
