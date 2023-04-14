@@ -19,16 +19,16 @@ public class PersonService : IPersonService
 
     public async Task Add(PersonCreateDto dto)
     {
-        using var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+        //using var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
-        /*var father = await _personRepository.GetByIdAsync(dto.FatherId) ?? throw new FatherDoesNotExistException("Person must have a father");
+        var father = await _personRepository.GetByIdAsync(dto.FatherId) ?? throw new FatherDoesNotExistException("Person must have a father");
         if (string.IsNullOrEmpty(father.WifeName)) throw new MotherNotFoundException("Children cannot exist without a mother");
 
         var person = new Person(dto.FirstName, father, dto.Dob, dto.Image, dto.WifeName, dto.WifeImage);
 
-        await _personRepository.InsertAsync(person).ConfigureAwait(false);*/
+        await _personRepository.InsertAsync(person).ConfigureAwait(false);
 
-        tx.Complete();
+        //tx.Complete();
     }
 
     public Task Update()

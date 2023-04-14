@@ -6,9 +6,9 @@ using FamilyTreeLib.Repositories;
 namespace FamilyTreeData.Repositories;
 
 public class PersonRepository : BaseRepository<Person>, IPersonRepository {
-    
+
     public PersonRepository(FamilyTreeDbContext context): base(context)
     {
-        
     }
+
 }

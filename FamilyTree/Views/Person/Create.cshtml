@@ -25,11 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FatherId" class="control-label"></label>
-                @Html.DropDownListFor(m => m.FatherId, 
-                    new SelectList(Model.FatherList, "Id", "FirstName"),
-                    optionLabel: "--- Select a category ---",
-                    htmlAttributes: new { @class = "form-control", id = "selectFather"}
-                    )
+                <select asp-for="FatherId" id="fatherList" class="form-control"></select>
                 <span asp-validation-for="FatherId" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -39,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MotherName" class="control-label"></label>
-                <input id="motherName" asp-for="MotherName" class="form-control" disabled/>
+                <input id="motherName" asp-for="MotherName" class="form-control" readonly/>
                 <p id="motherNameMessage">Please enter mother name</p>
                 <span asp-validation-for="MotherName" class="text-danger"></span>
             </div>
@@ -74,19 +70,45 @@
     <script type="text/javascript">
     
         $(document).ready(() => {
+            $('#hasSecondWife').prop('checked', false);
             $("#motherNameMessage").css("display", "none");
+            const URL = '@Url.Action("GetFatherList")';
+            $.ajax({  
+               type: "GET",  
+               url: URL,
+               success: function (data) {
+                   let s = '<option>---Select---</option>';  
+                   for (let i = 0; i < data.length; i++) {  
+                       s += '<option value="' + data[i].id + '">' + data[i].firstName + '</option>';  
+                   }  
+                   $("#fatherList").html(s);  
+               }  
+           });
         });
         
-        $("#selectFather").change(() => {
-            alert($("#selectFather").val());
+        let motherName = "";
+        $("#fatherList").change(() => {
+            const URL = '@Url.Action("GetMotherName")?fatherId='+$("#fatherList").val();
+            $.ajax({  
+               type: "GET",  
+               url: URL,
+               success: function (data) {
+                   motherName = data;
+                   $('#motherName').val(data);
+               }  
+           });
         });
         
         $('#hasSecondWife').change(function () {
+            let motherNameElement = $('#motherName');
+            console.log(motherName);
             if (this.checked){
-                $('#motherName').prop('disabled', false);
+                motherNameElement.prop('readonly', false);
                 $('#motherNameMessage').css({"display": "block", "color": "red"});
+                motherNameElement.val("");
             }else {
-                $('#motherName').prop('disabled', true);
+                motherNameElement.val(motherName);
+                motherNameElement.prop('readonly', true);
                 $('#motherNameMessage').css("display", "none");
             }
             

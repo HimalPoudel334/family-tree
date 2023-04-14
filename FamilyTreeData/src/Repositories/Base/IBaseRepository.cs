@@ -1,4 +1,5 @@
-﻿namespace FamilyTreeData.Repositories.Base;
+﻿
+namespace FamilyTreeData.Repositories.Base;
 
 public interface IBaseRepository<T> where T : class
 {
