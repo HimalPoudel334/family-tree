@@ -1,8 +1,10 @@
 .idea/
 bin/
 obj/
-FamilyTree/wwwroot/images/*
-FamilyTree/Logs/
+FamilyTree/wwwroot/images/persons/*
+FamilyTree/wwwroot/images/wives/*
+FamilyTree/Logs/*
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+FamilyTreeData/FamilyTreeApp*

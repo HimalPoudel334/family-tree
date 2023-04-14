@@ -7,6 +7,8 @@ using FamilyTreeLib.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +18,18 @@ builder.Services.AddControllersWithViews();
 //add database connection
 builder.Services.AddDbContext<FamilyTreeDbContext>(options => 
     options.UseLazyLoadingProxies().UseSqlite(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        x => x.MigrationsAssembly("FamilyTreeData")));
 
 //Dependency Injections
 //should be moved to separate class if necessary
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IFileUploadHelper, FileUploadHelper>();
+
+//adding logging
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 //adding authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

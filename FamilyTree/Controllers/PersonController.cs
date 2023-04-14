@@ -2,9 +2,11 @@ using FamilyTree.Extensions;
 using FamilyTree.Helpers;
 using FamilyTree.ViewModels;
 using FamilyTreeLib.Dtos;
+using FamilyTreeLib.Exceptions;
 using FamilyTreeLib.Repositories;
 using FamilyTreeLib.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamilyTree.Controllers
 {
@@ -36,28 +38,15 @@ namespace FamilyTree.Controllers
     */
         // GET: Person/Create
         [HttpGet]
-        public ActionResult Create()
+        public IActionResult Create()
         {
-            PersonCreateViewModel model = new()
-            {
-                FatherList = new List<ParentSelectViewModel>(){
-                    new() {
-                        Id = 1,
-                        FirstName = "Ram Bahadur"
-                    },
-                    new() {
-                        Id = 2,
-                        FirstName = "Shyam Kumar"
-                    }
-                }
-            };
-            return View(model);
+            return View();
         }
 
         // POST: Person/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(PersonCreateViewModel model)
+        public async Task<IActionResult> Create(PersonCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -82,7 +71,7 @@ namespace FamilyTree.Controllers
                 FirstName = model.FirstName,
                 FatherId = model.FatherId,
                 Mother = model.MotherName,
-                Dob = model.Dob,
+                Dob = model.Dob.Date,
                 WifeName = model.WifeName,
                 Image = _fileUploadHelper.ReturnUniqueFileName(model.Image),
                 WifeImage = model.WifeImage != null ? _fileUploadHelper.ReturnUniqueFileName(model.WifeImage) : null
@@ -151,5 +140,28 @@ namespace FamilyTree.Controllers
                     return View();
                 }
             }*/
+
+        public async Task<IActionResult> GetFatherList()
+        {
+            var fathers = await _personRepository.GetQueryable().Select(p => new ParentSelectViewModel()
+            {
+                Id = p.Id,
+                FirstName = p.FirstName
+            }).ToListAsync();
+            
+            return Json(fathers);
+        }
+
+        public async Task<IActionResult> GetMotherName(int fatherId)
+        {
+            if (fatherId <= 0)
+            {
+                return BadRequest();
+            }
+            
+            var father = await _personRepository.GetByIdAsync(fatherId) ?? throw new FatherDoesNotExistException();
+            return Json(father.WifeName ?? throw new MotherNotFoundException());
+
+        }
     }
 }
