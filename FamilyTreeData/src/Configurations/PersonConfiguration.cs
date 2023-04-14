@@ -36,8 +36,8 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
 
         _ = builder.Property(p => p.FatherId)
             .HasColumnName("father_id")
-            .HasColumnType(ColumnTypes.TEXT)
-            .HasMaxLength(200)
+            .HasColumnType(ColumnTypes.INTEGER)
+            .HasMaxLength(20)
             .IsRequired();
         
         _ = builder.Property(p => p.MotherName)
